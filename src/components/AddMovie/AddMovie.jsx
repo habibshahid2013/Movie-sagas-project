@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-function AddMovies() {
+function AddMovie() {
 
 
 
@@ -15,4 +15,4 @@ function AddMovies() {
 }
 
 
-export default AddMovies;
+export default AddMovie;
