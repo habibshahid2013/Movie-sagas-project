@@ -1,35 +1,106 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from "react";
+import { useHistory } from 'react-router-dom';
+
 
 function AddMovie() {
 
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    const [addMovie, setAddMovie] = useState("")
+    const [addUrl, setAddUrl] = useState("")
+    const [addDescription, setAddDescription] = useState("")
+    const [addGenre, setAddGenre] = useState("")
 
 
-    
+    let stateObject = { movieTitle: addMovie, poster: addUrl, description: addDescription, genre_id: addGenre};
+
+    useEffect(() => {
+        //dispatch over data in Saga
+        dispatch({
+            type: 'FETCH_GENRE',
+        })
+    }, []);
+
+
+    const handleSubmit = event => {
+        event.preventDefault();
+
+        if (addMovie.keys === ''){
+            alert('add proper input')
+        }
+        dispatch({
+            type: 'ADD_MOVIE',
+            payload: stateObject
+        });
+        history.push('/')
+
+    }
+
+    const cancel = () => {
+        history.push('/')
+    }
+
 
     return (
-
-        <>
+        <div>
+        
         <h1>ADD MOVIES 🎥</h1>
         <form onSubmit={handleSubmit}></form>
         <input 
+            required
             type="text"
             placeholder="movie title"
-            onChange=""
-            value
-            required></input>
+            onChange={(event) => setAddMovie({ ...addMovie, movieTitle: event.target.value }}
+            value={addMovie.movieTitle}
+             />
         <input
+            required
             type="text"
             placeholder="movie poster url"
-            onChange={}
-            value={}
-            required>URL</input>
-        <textarea></textarea>
-        <textarea></textarea>
-
-        </>
-    )
-}
+                onChange={(event) => setAddUrl({ ...addUrl, poster: event.target.value})}
+            value={addMovie.poster}
+             />
+        <textarea
+            required
+            cols="40"
+            rows="6"
+            name="description"
+            placeholder="Movie URL POSTER"
+                onChange={(event) => setAddDescription({ ...addDescription, description: event.target.value })}
+            value={addMovie.description}
+            
+             />
+       <select 
+        required
+        name="genre"
+                onChange={(event) => setAddGenre({ ...addGenre, genre: event.target.value })}
+        value={addMovie.genre_id}>
+            <option selected value=""> select here</option>
+            <option value="1">Adventure</option>
+            <option value="2">Animated</option>
+            <option value="3">Biographical</option>
+            <option value="4">Comedy</option>
+            <option value="5">Disaster</option>
+            <option value="6">Drama</option>
+            <option value="7">Epic</option>
+            <option value="8">Fantasy</option>
+            <option value="9">Musical</option>
+            <option value="10">Romantic</option>
+            <option value="11">Science Fiction</option>
+            <option value="12">Space-Opera</option>
+            <option value="13">Superhero</option>
+        </select>
+        <br />
+        <input type="submit" value="submit" />
+        <button onClick={cancel}>Cancel</button>
+        <form/>
+        </div>
+    );
+ }
+ }        
 
 
 export default AddMovie;
