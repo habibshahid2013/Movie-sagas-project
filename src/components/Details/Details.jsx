@@ -2,6 +2,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionChannel } from 'redux-saga/effects';
 import { useHistory, useParams } from 'react-router-dom';
+import './Details.css'
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
 
 
 function Details(){
@@ -30,13 +35,17 @@ function Details(){
         <section>
             {details.map(detail => {
                 return (
+                    <Card>
+                    <CardContent>
                     <div key={detail.id} >
+                        <h3>{detail.title}</h3>
                         <img src={detail.poster} />
                         <h3>{detail.genres}</h3>
-                        <h3>{detail.title}</h3>
                         <h4>{detail.description}</h4>
-                        <button onClick={backToList} > BACK TO LIST</button>
+                        <Button variant="contained" color="secondary" onClick={backToList} > BACK TO LIST</Button>
                     </div>
+                    </CardContent>
+                    </Card>
                 );
             })}
         </section>

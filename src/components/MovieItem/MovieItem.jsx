@@ -1,10 +1,19 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import './MovieItem.css'
+
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 
 function MovieItem ({movie}){
 
+    
 
     //setup for dispatch 
     const dispatch = useDispatch();
@@ -25,13 +34,19 @@ function MovieItem ({movie}){
     const addMoviePage = () => {
         history.push('/addmovie');
     }
-    return(
+    
 
+    return(
+        <Card>
+        <CardContent>
         <div key={movie.id} >
             <h3>{movie.title}</h3>
             <img onClick={nextPage} src={movie.poster} alt={movie.title} />
-            <button onClick={addMoviePage}>ADD Movie</button>
         </div>
+        </CardContent>
+            <Button variant="contained" color="secondary" onClick={addMoviePage}>ADD Movie</Button>
+        </Card>
+        
     )
 }
 

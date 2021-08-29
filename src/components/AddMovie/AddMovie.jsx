@@ -36,6 +36,7 @@ function AddMovie() {
         if (addMovie === '' || addUrl === '' || addDescription === '' || addGenre === ''){
             alert('add proper input')
         }
+        //here you are sending the add Movie data to be posted in index.js
         dispatch({
             type: 'ADD_MOVIE',
             payload: stateObject,
@@ -90,8 +91,9 @@ function AddMovie() {
         </select>
         <textarea
             required
-            cols="40"
-            rows="6"
+            cols="80"
+            rows="8"
+            maxLength="300"
             name="description"
             placeholder="Descriptions"
             onChange={(event) => setAddDescription({ ...addDescription, description: event.target.value })}
