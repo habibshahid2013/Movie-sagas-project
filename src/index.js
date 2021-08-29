@@ -24,6 +24,7 @@ function* addMovie(action) {
     console.log("action.payload is working", action.payload)
     try {
         const response = yield axios.post('/api/movie', action.payload)
+        put({ type: 'FETCH_MOVIES' });
     } catch {
         console.log("error");
         alert('Movie did not POST')

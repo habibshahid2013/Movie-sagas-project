@@ -19,7 +19,7 @@ function AddMovie() {
     const [addGenre, setAddGenre] = useState("")
 
 
-    let stateObject = { movieTitle: addMovie, poster: addUrl, description: addDescription, genre_id: addGenre};
+    let stateObject = { title: addMovie, poster: addUrl, description: addDescription, genre_id: addGenre};
 
     //useEffect is enabled to to make sure FETCH_GENRE is initiated on start
     useEffect(() => {
@@ -41,7 +41,7 @@ function AddMovie() {
             payload: stateObject,
         });
         history.push('/')
-
+            
     }
     //this function will cancel the add movie and take you back to the home page
     const cancel = () => {
@@ -58,8 +58,8 @@ function AddMovie() {
             required
             type="text"
             placeholder="movie title"
-            onChange={(event) => setAddMovie({ ...addMovie, movieTitle: event.target.value })}
-            value={addMovie.movieTitle}
+            onChange={(event) => setAddMovie({ ...addMovie, title: event.target.value })}
+            value={addMovie.title}
              />
         <input
             required
@@ -70,8 +70,8 @@ function AddMovie() {
              />
        <select 
         required
-        name="genre"
-                onChange={(event) => setAddGenre({ ...addGenre, genre: event.target.value })}
+        name="genre_id"
+                onChange={(event) => setAddGenre({ ...addGenre, genre_id: event.target.value })}
         value={addMovie.genre_id}>
             <option defaultValue=""> select here</option>
             <option value="1">Adventure</option>

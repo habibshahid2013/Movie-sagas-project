@@ -68,7 +68,9 @@ router.post('/', (req, res) => {
       VALUES  ($1, $2);
       `
       // SECOND QUERY ADDS GENRE FOR THAT NEW MOVIE
-      pool.query(insertMovieGenreQuery, [createdMovieId, req.body.genre_id]).then(result => {
+      console.log('RIGHT HERE GENRE_ID', req.body.genre_id);
+      
+      pool.query(insertMovieGenreQuery, [createdMovieId, req.body.genre_id.genre_id]).then(result => {
         //Now that both are done, send back success!
         res.sendStatus(201);
       }).catch(err => {
