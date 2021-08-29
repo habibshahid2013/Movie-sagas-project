@@ -16,6 +16,35 @@ router.get('/', (req, res) => {
 
 });
 
+router.get('/:id', (req, res) => {
+  const reqParams = req.params.id;
+  console.log('testing ID', req.query.id);
+
+  const sqlQuery = `
+    SELECT
+    "movies".id,
+    "movies".title,
+    "movies".description,
+    ARRAY_AGG("genres".name) "genres"
+    FROM "movies"
+    JOIN "movies_genres"
+    ON ("movies".id = "movies_genres".movie_id)
+    JOIN "genres"
+    ON ("genres".id = "movies_genres".genre_id) WHERE "movies".id = $1 GROUP BY "movies".id;
+      `
+    ;
+  pool.query(sqlQuery, [reqParams])
+    .then(result => {
+      console.log('results', result.rows);
+      res.send(result.rows);
+    })
+    .catch(err => {
+      console.log('ERROR: Get all GENRE', err);
+      res.sendStatus(500)
+    })
+
+})
+
 router.post('/', (req, res) => {
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie

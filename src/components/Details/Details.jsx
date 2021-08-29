@@ -1,24 +1,39 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { actionChannel } from 'redux-saga/effects';
+import { useHistory, useParams } from 'react-router-dom';
+
 
 function Details(){
 
     const dispatch = useDispatch();
-    const movies = useSelector(store => store.movies);
+    const details = useSelector(store => store.details);
+    
+    let history = useHistory();
+
+    let movieId = useParams()
+    console.log('checking id', movieId.id);
+
+    const backToList = () => {
+        history.push('/');
+    }
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_MOVIES' });
+        
+        dispatch({ type: 'FETCH_DETAILS', payload: details});
     }, []);
 
     return(
  
-        <section className="movies">
-            {movies.map(movie => {
+        <section>
+            {details.map(detail => {
                 return (
-                    <div key={movie.id} >
-                        <h3>{movie.title}</h3>
-                        <img src={movie.poster} alt={movie.title} />
-                        <h4>{movie.description}</h4>
+                    <div key={detail.id} >
+                        <img src={detail.poster} />
+                        <h3>{detail.genres}</h3>
+                        <h3>{detail.title}</h3>
+                        <h4>{detail.description}</h4>
+                        <button onClick={backToList} > BACK TO LIST</button>
                     </div>
                 );
             })}

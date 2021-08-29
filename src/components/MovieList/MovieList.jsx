@@ -3,10 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css'
 import { useHistory } from 'react-router-dom';
 
+
 function MovieList() {
+
+    
     let history = useHistory();
 
     const nextPage = () => {
+        dispatch({
+            type: 'FETCH_DETAILS',
+            payload: 0
+        })
         history.push('/details');
     }
 
@@ -18,7 +25,7 @@ function MovieList() {
     const movies = useSelector(store => store.movies);
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_MOVIES' });
+        dispatch({ type: 'FETCH_MOVIES'});
     }, []);
 
     return (
@@ -29,8 +36,7 @@ function MovieList() {
                     return (
                         <div key={movie.id} >
                             <h3>{movie.title}</h3>
-                            <img src={movie.poster} alt={movie.title}/>
-                            <button onClick={nextPage}>Details</button>
+                            <img onClick={nextPage} src={movie.poster} alt={movie.title}/>
                             <button onClick={addMoviePage}>ADD Movie</button>
                         </div>
                     );
