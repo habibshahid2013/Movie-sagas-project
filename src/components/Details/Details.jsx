@@ -13,7 +13,7 @@ function Details(){
     let history = useHistory();
 
     let movieId = useParams()
-    console.log('checking id', movieId.id);
+    console.log('checking id', movieId)
 
     //this will send the user back to the home page onClick
     const backToList = () => {
@@ -22,7 +22,7 @@ function Details(){
 
     //UseEffect is needed to run Fetch_DETAILS within component 
     useEffect(() => {
-        dispatch({ type: 'FETCH_DETAILS', payload: details});
+        dispatch({ type: 'SET_ID', payload: details});
     }, []);
 
     return(
