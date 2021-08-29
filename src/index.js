@@ -30,8 +30,9 @@ function* fetchAllMovies() {
         
 }
 
+//function for grabbing all details for movies 
 function* fetchDetails(action) {
-    // get all movies from the DB
+    // get all movies
     try {
         const details = yield axios.get(`/api/movie/${action.payload}`);
         console.log('get all fetch details', details.data);
@@ -65,7 +66,7 @@ const genres = (state = [], action) => {
             return state;
     }
 }
-
+//Used to store the movie details
 const details = (state = [], action) => {
     switch (action.type) {
         case 'SET_DETAILS':

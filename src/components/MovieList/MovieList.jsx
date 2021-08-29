@@ -6,9 +6,10 @@ import { useHistory } from 'react-router-dom';
 
 function MovieList() {
 
-    
+    //Set up to allow history between links
     let history = useHistory();
 
+    //Function to dispatch Fetch Details and history onClick 
     const nextPage = () => {
         dispatch({
             type: 'FETCH_DETAILS',
@@ -16,14 +17,16 @@ function MovieList() {
         })
         history.push('/details');
     }
-
+    //add movie page function will take you to the next onClick 
     const addMoviePage = () => {
         history.push('/addmovie');
     }
 
+    //setup for dispatch 
     const dispatch = useDispatch();
     const movies = useSelector(store => store.movies);
 
+    //UseEffect is needed to run Fetch_Movie within component 
     useEffect(() => {
         dispatch({ type: 'FETCH_MOVIES'});
     }, []);

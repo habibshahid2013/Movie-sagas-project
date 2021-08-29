@@ -5,21 +5,23 @@ import { useHistory, useParams } from 'react-router-dom';
 
 
 function Details(){
-
+    //setup for dispatch 
     const dispatch = useDispatch();
     const details = useSelector(store => store.details);
     
+    //Set up to allow history between links
     let history = useHistory();
 
     let movieId = useParams()
     console.log('checking id', movieId.id);
 
+    //this will send the user back to the home page onClick
     const backToList = () => {
         history.push('/');
     }
 
+    //UseEffect is needed to run Fetch_DETAILS within component 
     useEffect(() => {
-        
         dispatch({ type: 'FETCH_DETAILS', payload: details});
     }, []);
 

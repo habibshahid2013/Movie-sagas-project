@@ -6,9 +6,13 @@ import { useHistory } from 'react-router-dom';
 
 function AddMovie() {
 
+    //Set up for the history
     const history = useHistory();
+
+    //Set up for the dispatch
     const dispatch = useDispatch();
 
+    //added useStates for the inputs 
     const [addMovie, setAddMovie] = useState("")
     const [addUrl, setAddUrl] = useState("")
     const [addDescription, setAddDescription] = useState("")
@@ -17,6 +21,7 @@ function AddMovie() {
 
     let stateObject = { movieTitle: addMovie, poster: addUrl, description: addDescription, genre_id: addGenre};
 
+    //useEffect is enabled to to make sure FETCH_GENRE is initiated on start
     useEffect(() => {
         //dispatch over data in Saga
         dispatch({
@@ -24,7 +29,7 @@ function AddMovie() {
         })
     }, []);
 
-
+    //this function is to run the event of the input
     const handleSubmit = event => {
         event.preventDefault();
 
@@ -38,7 +43,7 @@ function AddMovie() {
         history.push('/')
 
     }
-
+    //this function will cancel the add movie and take you back to the home page
     const cancel = () => {
         history.push('/')
     }
@@ -46,14 +51,14 @@ function AddMovie() {
 
     return (
         <div>
-        
+            
         <h1>ADD MOVIES 🎥</h1>
         <form onSubmit={handleSubmit}></form>
         <input 
             required
             type="text"
             placeholder="movie title"
-            onChange={(event) => setAddMovie({ ...addMovie, movieTitle: event.target.value }}
+            onChange={(event) => setAddMovie({ ...addMovie, movieTitle: event.target.value })}
             value={addMovie.movieTitle}
              />
         <input
@@ -62,16 +67,6 @@ function AddMovie() {
             placeholder="movie poster url"
                 onChange={(event) => setAddUrl({ ...addUrl, poster: event.target.value})}
             value={addMovie.poster}
-             />
-        <textarea
-            required
-            cols="40"
-            rows="6"
-            name="description"
-            placeholder="Movie URL POSTER"
-                onChange={(event) => setAddDescription({ ...addDescription, description: event.target.value })}
-            value={addMovie.description}
-            
              />
        <select 
         required
@@ -93,6 +88,16 @@ function AddMovie() {
             <option value="12">Space-Opera</option>
             <option value="13">Superhero</option>
         </select>
+        <textarea
+            required
+            cols="40"
+            rows="6"
+            name="description"
+            placeholder="Descriptions"
+            onChange={(event) => setAddDescription({ ...addDescription, description: event.target.value })}
+            value={addMovie.description}
+
+        />
         <br />
         <input type="submit" value="submit" />
         <button onClick={cancel}>Cancel</button>
@@ -100,7 +105,7 @@ function AddMovie() {
         </div>
     );
  }
- }        
+      
 
 
 export default AddMovie;
