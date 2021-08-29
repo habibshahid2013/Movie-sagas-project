@@ -15,6 +15,20 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('FETCH_DETAILS', fetchDetails);
+    yield takeEvery('ADD_MOVIE', addMovie);
+}
+
+
+//this function is is grabbing the new movie data and POST the payload to the database
+function* addMovie(action) {
+    console.log("action.payload is working", action.payload)
+    try {
+        const response = yield axios.post('/api/movie', action.payload)
+    } catch {
+        console.log("error");
+        alert('Movie did not POST')
+    }
+
 }
 
 function* fetchAllMovies() {

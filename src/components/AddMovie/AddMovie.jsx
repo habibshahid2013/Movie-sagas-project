@@ -33,12 +33,12 @@ function AddMovie() {
     const handleSubmit = event => {
         event.preventDefault();
 
-        if (addMovie.keys === ''){
+        if (addMovie === '' || addUrl === '' || addDescription === '' || addGenre === ''){
             alert('add proper input')
         }
         dispatch({
             type: 'ADD_MOVIE',
-            payload: stateObject
+            payload: stateObject,
         });
         history.push('/')
 
@@ -50,10 +50,10 @@ function AddMovie() {
 
 
     return (
-        <div>
-            
+     
+        <>
         <h1>ADD MOVIES 🎥</h1>
-        <form onSubmit={handleSubmit}></form>
+        <form onSubmit={handleSubmit}>
         <input 
             required
             type="text"
@@ -73,7 +73,7 @@ function AddMovie() {
         name="genre"
                 onChange={(event) => setAddGenre({ ...addGenre, genre: event.target.value })}
         value={addMovie.genre_id}>
-            <option selected value=""> select here</option>
+            <option defaultValue=""> select here</option>
             <option value="1">Adventure</option>
             <option value="2">Animated</option>
             <option value="3">Biographical</option>
@@ -99,10 +99,11 @@ function AddMovie() {
 
         />
         <br />
-        <input type="submit" value="submit" />
+        <input type="submit" value="submit"/>
         <button onClick={cancel}>Cancel</button>
-        <form/>
-        </div>
+        </form>
+       </>
+    
     );
  }
       
