@@ -13,12 +13,6 @@ function App() {
         <nav>
           <ul>
             <li>
-              <Link to="/">MovieList</Link>
-            </li>
-            <li>
-              <Link to="/details">details</Link>
-            </li>
-            <li>
               <Link to="/addmovie">Add Movies</Link>
             </li>
           </ul>
