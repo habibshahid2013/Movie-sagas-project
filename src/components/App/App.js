@@ -19,7 +19,7 @@ function App() {
               <Link to="/details">details</Link>
             </li>
             <li>
-              <Link to="/addmovie">Favorites</Link>
+              <Link to="/addmovie">Add Movies</Link>
             </li>
           </ul>
         </nav>
