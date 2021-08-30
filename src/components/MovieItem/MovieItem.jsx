@@ -43,9 +43,9 @@ function MovieItem ({movie}){
             <h3>{movie.title}</h3>
             <img onClick={nextPage} src={movie.poster} alt={movie.title} />
         </div>
-        {/* </CardContent>
-            <Button variant="contained" color="secondary" onClick={addMoviePage}>ADD Movie</Button>
-        </Card> */}
+        </CardContent>
+            {/* <Button variant="contained" color="secondary" onClick={addMoviePage}>ADD Movie</Button> */}
+        </Card>
         
     )
 }
